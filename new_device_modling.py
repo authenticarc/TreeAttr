@@ -5,50 +5,6 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-'''
-SELECT  imei
-        ,source
-        ,package
-        ,os
-        ,IF(language IN ('zh','en'),'main','not_main') language_group
-        ,language
-        ,CASE   WHEN language = 'zh' OR country = '中国' THEN '中国'
-                WHEN country IN ('新加坡','台湾','香港','日本','韩国') THEN '东亚'
-                WHEN country IN ('印度尼西亚','印度','孟加拉国','巴基斯坦',' 泰国','越南','斯里兰卡') THEN '南亚'
-                WHEN country IN ('美国','英国','法国','西班牙','俄罗斯联邦','德国') THEN '欧美'
-                ELSE '其他国家'
-        END country_group
-        ,country
-        ,first_token_trade_coin_pair
-        ,first_token_trade_chain_pair
-        ,first_nft_trade_token_title
-        ,first_connect_dapp
-        ,first_otc_fiat_code
-        ,airdrop_name
-        ,invite_code
-        ,red_packet_code
-        ,amt_usd
-        ,red_packet_amount
-        ,total_trade
-        ,version
-        ,red_packet_coin
-        ,red_packet_name
-        ,main_token_hold_usdt
-        ,future_total_trade
-        ,lately_login_ip
-        ,wallet_type
-        ,level_1_user_source
-        ,level_2_user_source
-        ,level_3_user_source
-        ,IF(device_create_date = '2024-04-28',1,0) target
-        ,device_create_date
-FROM    dm_bi_bk_user_root_analysis_stat_df
-WHERE   pt = '${bizdate}'
-AND     device_create_date IN ('2024-04-27','2024-04-28')
-AND     wallet_type <> 100
-;
-'''
-
 df = pd.read_csv('data/new_device.csv')
 
 features = ['source', 'package', 'os', 'language', 'country','language_group', 'country_group',
