@@ -1,0 +1,38 @@
+# For Classify Task
+
+# The name of the task
+task_name: New imei
+data_path: data/new_imei.csv
+
+features:
+- source 
+- package 
+- os 
+- language 
+- country
+- first_token_trade_coin_pair
+- first_token_trade_chain_pair 
+- first_nft_trade_token_title
+- first_connect_dapp 
+- first_otc_fiat_code 
+- airdrop_name
+- invite_code 
+- red_packet_code
+- amt_usd 
+- total_trade 
+- future_total_trade 
+- lately_login_ip
+- wallet_type 
+- level_1_user_source
+- level_2_user_source 
+- level_3_user_source
+
+target: target
+
+time_col: device_create_date
+time_comp:
+- "2024-05-11"
+- "2024-05-12"
+
+pcol: imei
+

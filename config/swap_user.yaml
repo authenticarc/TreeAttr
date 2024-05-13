@@ -1,0 +1,28 @@
+# For Classify Task
+
+# The name of the task
+task_name: Swap Identity Change
+data_path: data/swap.csv
+
+features:
+- coin_pair
+- chain_pair 
+- market
+- country 
+- language 
+- from_amt_usd 
+- imei_level_1_user_source 
+- imei_level_2_user_source
+- imei_level_3_user_source 
+- lifecycle_tag
+- new_swap
+
+target: target
+
+time_col: dt
+time_comp:
+- "2024-05-11"
+- "2024-05-12"
+
+pcol: identity
+

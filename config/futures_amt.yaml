@@ -1,0 +1,27 @@
+# For Regression Task
+
+# The name of the task
+task_name: Futures amt Change
+data_path: data/futures.csv
+
+features:
+- symbol_id 
+- country 
+- language 
+- imei_level_1_user_source 
+- imei_level_2_user_source
+- imei_level_3_user_source 
+- lifecycle_tag
+- new_future
+- dt
+- user_id
+
+target: trade_amt
+
+time_col: dt
+time_comp:
+- "2024-05-11"
+- "2024-05-12"
+
+pcol: trade_amt
+
