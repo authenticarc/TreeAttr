@@ -73,7 +73,7 @@ class TreeAttrBase(ABC):
         for q in query:
             if 'in' in q:
                 if q.startswith('~'):
-                    pattern = r'([a-zA-Z_]+) in '
+                    pattern = r'([0-9a-zA-Z_]+) in '
                     match = re.search(pattern, q)
                     key = match.group(1)
                     value_a = eval(q.split(' in ')[-1].strip(')').strip('('))
@@ -90,7 +90,7 @@ class TreeAttrBase(ABC):
                     key = q.split(' <= ')[0].strip('~(')
                     value = eval(q.split(' <= ')[-1].strip(')').strip('('))
                     if key in rq.keys():
-                        if value > rq[key]:
+                        if value > rq[key]['over_threshold']:
                             rq[key] = {'over_threshold': value}
                     else:
                         rq[key] = {'over_threshold': value}
@@ -98,7 +98,7 @@ class TreeAttrBase(ABC):
                     key = q.split(' <= ')[0]
                     value = eval(q.split(' <= ')[-1].strip(')').strip('('))
                     if key in rq.keys():
-                        if value < rq[key]:
+                        if value < rq[key]['lower_threshold']:
                             rq[key] = {'lower_threshold': value}
                     else:
                         rq[key] = {'lower_threshold': value}
