@@ -1,91 +1,63 @@
-# TreeAttr
-Use Lightgbm to attribute data change
+## TreeAttr
 
-- 活跃
-- 新增
-- 持仓转化
-- swap交易人数和金额
-- future交易人数和金额
+TreeAttr leverages LightGBM to attribute changes in data, facilitating the understanding of underlying factors driving variations in datasets.
 
-## swap数据归因
+### Table of Contents
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [Usage](#usage)
+    - [Swap Data Attribution](#swap-data-attribution)
+    - [Futures User Attribution](#futures-user-attribution)
+    - [New Device Attribution](#new-device-attribution)
+4. [Configuration](#configuration)
+5. [Contributing](#contributing)
+6. [License](#license)
+
+### Overview
+TreeAttr uses LightGBM to attribute changes in various data sets, aiding in identifying key factors that contribute to data variations in scenarios like swaps, futures trading, and new device registrations.
+
+### Installation
+To install TreeAttr, clone the repository and install the dependencies:
+
+```bash
+git clone https://github.com/authenticarc/TreeAttr.git
+cd TreeAttr
+pip install -r requirements.txt
+```
+
+### Usage
+TreeAttr provides scripts for different attribution tasks. Below are examples of how to run these tasks.
+
+#### Swap Data Attribution
+For swap data attribution:
 
 ```bash
 python3 scripts/reg.py --config config/swap_amt.yaml | grep -v "LightGBM"
 python3 scripts/cls.py --config config/swap_user.yaml | grep -v "LightGBM"
 ```
 
-
-```yaml
-# For classify task
-
-# The name of the task
-task_name: Swap amt Change
-data_path: data/swap.csv
-
-features:
-- coin_pair
-- chain_pair 
-- market
-- country 
-- language 
-- imei_level_1_user_source 
-- imei_level_2_user_source
-- imei_level_3_user_source 
-- lifecycle_tag
-- dt
-- new_swap
-
-target: from_amt_usd
-
-time_col: dt
-time_comp:
-- "2024-05-11"
-- "2024-05-12"
-
-pcol: from_amt_usd
-```
-
-```yaml
-# For classify task
-
-# The name of the task
-task_name: Swap Identity Change
-data_path: data/swap.csv
-
-features:
-- coin_pair
-- chain_pair 
-- market
-- country 
-- language 
-- from_amt_usd 
-- imei_level_1_user_source 
-- imei_level_2_user_source
-- imei_level_3_user_source 
-- lifecycle_tag
-- create_hour
-- new_swap
-
-target: target
-
-time_col: dt
-time_comp:
-- "2024-05-11"
-- "2024-05-12"
-
-pcol: identity
-```
-
-## futures用户归因
+#### Futures User Attribution
+For futures user attribution:
 
 ```bash
 python3 scripts/cls.py --config config/futures_user.yaml | grep -v "LightGBM"
 python3 scripts/reg.py --config config/futures_amt.yaml | grep -v "LightGBM"
 ```
 
-
-## 新增设备
+#### New Device Attribution
+For new device attribution:
 
 ```bash
 python3 scripts/cls.py --config config/new_imei.yaml | grep -v "LightGBM"
 ```
+
+### Configuration
+Configurations are provided in YAML files within the `config` directory. Each task has a corresponding YAML configuration file that specifies the parameters for the task, such as data paths, feature columns, and target variables.
+
+### Contributing
+Contributions are welcome. Please fork the repository and submit pull requests for any improvements.
+
+### License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+For more details, visit the [TreeAttr GitHub repository](https://github.com/authenticarc/TreeAttr).
